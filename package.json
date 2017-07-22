@@ -1,0 +1,26 @@
+{
+  "name": "test_stack",
+  "version": "0.0.1",
+  "description": "Verify features from Sinon, Mocha, Chai and Proxyquire",
+  "main": "index.js",
+  "scripts": {
+    "simple": "mocha simple-test/index-test.js"
+  },
+  "keywords": [
+    "test",
+    "mocks",
+    "stubs",
+    "spies"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2",
+    "proxyquire": "^1.8.0",
+    "sinon": "^2.3.8"
+  },
+  "dependencies": {
+    "pretty-log": "^0.1.0"
+  }
+}
