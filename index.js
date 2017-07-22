@@ -24,6 +24,12 @@ const ChatService = {
                 listener.call(null, message);
             }
         }
+    },
+
+    killAll() {
+        for(let [name, listener] of clients) {
+            clients.delete(name, listener);
+        }
     }
 
 }
