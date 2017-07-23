@@ -21,8 +21,14 @@ const ChatService = {
     publish(from, message) {
         for(let [name, listener] of clients) {
             if(from !== name) {
-                listener.call(null, message);
+                listener.call(null, {from, message});
             }
+        }
+    },
+
+    replyTo(from, to, message) {
+        if(clients.has(from) && clients.has(to)) {
+            clients.get(to).call(null, {from, message:`${from} >> ${message}`});
         }
     },
 
