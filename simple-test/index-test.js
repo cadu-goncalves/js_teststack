@@ -1,7 +1,7 @@
 const expect = require('chai').expect,
       sinon = require('sinon');
 
-const ChatService = require('../index.js');
+const ChatService = require('./index.js');
 
 describe('simple tests', () => {
 
@@ -115,6 +115,7 @@ describe('simple tests', () => {
 
             it('should replace an object method', () => {
                 let messages = [];
+                let replies = [];
                 const myObject =  {
                     myMethod(data) { messages.push(data.message) }
                 }
@@ -124,14 +125,16 @@ describe('simple tests', () => {
                 });
 
                 ChatService.register('stub', methodStub);
-                ChatService.register('me', (data) => {messages.push(data.message)});
+                ChatService.register('me', (data) => {replies.push(data.message)});
                 ChatService.publish('me', 'hello');
 
                 expect(methodStub.callCount).to.be.equal(1);
-                expect(messages).to.include.members(['stub >> i am a robot!']);
+                expect(replies).to.include.members(['stub >> i am a robot!']);
+                // Origial method is not called
+                expect(messages).to.be.empty;
             });
 
-            xit('should replace an object method wrapping it inside a spy', () => {
+            xit('(deprecated) should replace an object method wrapping it inside a spy', () => {
                 let messages = [];
                 const myObject =  {
                     myMethod(data) { messages.push(data.message) }
