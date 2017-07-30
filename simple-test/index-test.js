@@ -125,7 +125,7 @@ describe('simple tests', () => {
                 });
 
                 ChatService.register('stub', methodStub);
-                ChatService.register('me', (data) => {replies.push(data.message)});
+                ChatService.register('me', (data) => { replies.push(data.message) });
                 ChatService.publish('me', 'hello');
 
                 expect(methodStub.callCount).to.be.equal(1);
@@ -145,7 +145,7 @@ describe('simple tests', () => {
                 });
 
                 ChatService.register('stub', methodStub);
-                ChatService.register('me', (data) => {messages.push(data.message)});
+                ChatService.register('me', (data) => { messages.push(data.message) });
                 ChatService.publish('me', 'hello');
 
                 expect(methodStub.callCount).to.be.equal(1);
@@ -154,6 +154,36 @@ describe('simple tests', () => {
 
 
             it('should replace all object methods at once', () => {
+
+            });
+        })
+
+        describe('sinon mocks', () => {
+
+            it('should mock objects and provide expectations over them', () => {
+                let messages = [];
+                let objectMock = sinon.mock(ChatService);
+
+                // Mocks can't use Stub or Spy APIs
+                // but can define expectations
+                objectMock.expects("publish").withArgs("me", sinon.match.string).atMost(2);
+
+                ChatService.register('other', (data) => { messages.push(data.message) });
+                ChatService.register('me', () => { });
+                ChatService.publish('me', 'hello world');
+                ChatService.publish('me', 'bye bye');
+
+                // Expectations can be verified
+                objectMock.verify();
+
+                // Original method is not called
+                expect(messages).to.be.empty;
+
+                // Use restore to eliminate mock control over object
+                objectMock.restore()
+                ChatService.publish('me', '123');
+                expect(messages).to.be.include.members(['123']);
+
 
             });
         })
