@@ -2,7 +2,6 @@
   "name": "test_stack",
   "version": "0.0.1",
   "description": "Verify features from Sinon, Mocha, Chai and Proxyquire",
-  "main": "index.js",
   "scripts": {
     "basic": "mocha basic-sinon-chai/index.test.js",
     "dirty": "mocha dirty-chai/index.test.js"
