@@ -4,7 +4,8 @@
   "description": "Verify features from Sinon, Mocha, Chai and Proxyquire",
   "main": "index.js",
   "scripts": {
-    "simple": "mocha simple-test/index-test.js"
+    "basic": "mocha basic-sinon-chai/index.test.js",
+    "dirty": "mocha dirty-chai/index.test.js"
   },
   "keywords": [
     "test",
@@ -16,9 +17,11 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.0",
+    "dirty-chai": "^2.0.1",
     "mocha": "^3.4.2",
     "proxyquire": "^1.8.0",
-    "sinon": "^2.3.8"
+    "sinon": "^2.3.8",
+    "sinon-chai": "^2.12.0"
   },
   "dependencies": {
     "pretty-log": "^0.1.0"
